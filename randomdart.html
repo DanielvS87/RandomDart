@@ -10,12 +10,12 @@
 <body>
     <div class="wrapper">
         <div id="selection">
-            <select name="gamemode">
+            <select id="selectList" name="gamemode">
               <option value="all">all</option>
-              <option value="all">single</option>
+              <option value="single">single</option>
               <option value="double">double</option>
               <option value="triple">triple</option>
-              <option value="singledouble">double & double</option>
+              <option value="singledouble">single & double</option>
               <option value="singletriple">single & triple</option>
               <option value="doubletriple">double & triple</option>
             </select>
@@ -26,6 +26,9 @@
             <svg viewBox="0 0 1000 1000" id="board" width="95%">
 
             </svg>
+        </div>
+        <div>
+            <button id=randomBtn>Get Three Areas</button>
         </div>
     </div>
 
