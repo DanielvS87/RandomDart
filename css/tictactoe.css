@@ -1,0 +1,111 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body, html{
+    width: 100vw;
+    height: 100vh;
+    background:#555;
+    overflow: hidden;
+}
+
+h2{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+
+    text-align: center;
+
+}
+
+.wrapper{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 100%;
+    display: grid;
+    grid-template-areas: "header""game""button";
+    grid-template-rows: 2fr 3fr 2fr;
+    grid-template-columns: 1fr;
+    background: #999;
+}
+
+.wrapper > div {
+    display: grid;
+}
+
+#textArea{
+    padding-top: 30px;
+    grid-area: header;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#gameArea{
+    grid-area: game;
+    justify-content: center;
+    align-items: center;
+}
+
+#buttonArea{
+    grid-area: button;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#ttt{
+    height:500px;
+}
+
+.square:hover{
+    cursor: pointer;
+    fill: rgb(7, 145, 7);
+}
+
+.square.used:hover{
+    cursor: default;
+    fill: transparent;
+}
+
+.cross, .circle{
+    display: none;
+}
+
+.cross.show, .circle.show{
+    display: block;
+}
+
+#resetBtn{
+    width: 175px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    background:  #555;
+    color: white;
+}
+
+#resetBtn:hover{
+    cursor: pointer;
+    background: #999;
+    color:black;
+    border: 1px solid black;
+}
+
+@media only screen and (max-width: 800px){
+    #ttt{
+        width:100%;
+    }
+
+    .wrapper{
+        width: 100%;
+    }
+    h2{
+        font-size: 2em;
+    }
+}

@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.green {
+    fill : green;
+}
+
+.black {
+    fill : black
+}
+
+.red {
+    fill : red;
+}
+
+.beige {
+    fill : beige;
+}
+
+.scores {
+    font-size: 3em;
+    fill: white;
+}
+
+.area:hover {
+    fill: blue;
+}
+
+.selected {
+    fill: blue;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper{
+    overflow: hidden;
+    background: #999;
+    width:100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-areas: "selection""board""button";
+    grid-template-rows: 100px 1fr 100px;
+}
+
+#selection{
+    
+    grid-area: selection;
+}
+
+#SvgSection{
+    position: relative;
+    grid-area: board;
+    align-content: center;
+    justify-content: center;
+}
+
+#board{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+

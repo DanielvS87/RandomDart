@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Darts</title>
+    <link rel="stylesheet" href="css/randomdart.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="selection">
+            <select name="gamemode">
+              <option value="all">all</option>
+              <option value="all">single</option>
+              <option value="double">double</option>
+              <option value="triple">triple</option>
+              <option value="singledouble">double & double</option>
+              <option value="singletriple">single & triple</option>
+              <option value="doubletriple">double & triple</option>
+            </select>
+            <br><br>
+            <button id="selectBtn">Select Game Mode</button>
+        </div>
+        <div id="svgSection">
+            <svg viewBox="0 0 1000 1000" id="board" width="95%">
+
+            </svg>
+        </div>
+    </div>
+
+    <script src="js/randomdart.js"></script>
+</body>
+</html>
