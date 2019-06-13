@@ -1,4 +1,6 @@
-
+document.getElementById("selectBtn").addEventListener("click", changeMode)
+document.getElementById("randomBtn").addEventListener("click", getRandomAreas)
+let mode = "all";
 
 function createPizza(CompleteHeight, degAngle, singleBottomHeight, doubleHeight, singleUpperHeight, tripleHeight, numberHeight, classNameOne, classNameTwo, rotation, number){
     
@@ -137,19 +139,60 @@ function createTotalBoard(){
     svg.appendChild(createCircle(50, colorTwo[1]));
     // above the single bull the bullseye
     svg.appendChild(createCircle(25, colorTwo[0]));
-
-    getRandomAreas();
 }
 
 createTotalBoard();
 
-
 function getRandomAreas(){
     const array = Array.from(document.getElementsByClassName("area"));
+    array.map(it=>it.classList.remove("selected"));
     let randomAreas = [];
-    for( var i = 0; i<3 ;i++){
-        randomAreas.push(array.splice(Math.floor(Math.random()*array.length) , 1));
+    if(mode==="all"){
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(array.splice(Math.floor(Math.random()*array.length) , 1));
+        }
+    } else if(mode==="single") {
+        const singles = Array.from(document.getElementsByClassName("single"));
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(singles.splice(Math.floor(Math.random()*singles.length) , 1));
+        }
+    } else if(mode==="double"){
+        const doubles = Array.from(document.getElementsByClassName("double"));
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(doubles.splice(Math.floor(Math.random()*doubles.length) , 1));
+        }
+    } else if(mode==="triple"){
+        const triples = Array.from(document.getElementsByClassName("triple"));
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(triple.splice(Math.floor(Math.random()*triple.length) , 1));
+        }
+    } else if(mode==="singledouble"){
+        const double = Array.from(document.getElementsByClassName("double"));
+        const single = Array.from(document.getElementsByClassName("single"))
+        const singledouble = [...double, ...single];
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(singledouble.splice(Math.floor(Math.random()*singledouble.length) , 1));
+        }
+    } else if(mode==="singletriple"){
+        const triple = Array.from(document.getElementsByClassName("triple"));
+        const single = Array.from(document.getElementsByClassName("single"))
+        const singletriple = [...triple, ...single];
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(singletriple.splice(Math.floor(Math.random()*singletriple.length) , 1));
+        }
+    } else if(mode==="doubletriple"){
+        const triple = Array.from(document.getElementsByClassName("triple"));
+        const double = Array.from(document.getElementsByClassName("double"))
+        const doubletriple = [...triple, ...double];
+        for( var i = 0; i<3 ;i++){
+            randomAreas.push(doubletriple.splice(Math.floor(Math.random()*doubletriple.length) , 1));
+        }
     }
     randomAreas.map(it=>it[0].classList.add("selected"));
 }
+
+function changeMode(){
+    mode = document.getElementById("selectList").value;
+}
+
 
