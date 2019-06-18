@@ -102,13 +102,14 @@ function displacement(height, degAngle){
     return [xDis, yDis];  
 }
 
-function createCircle(radius, color){
+function createCircle(radius, color, type){
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", 500);
     circle.setAttribute("cy", 500);
     circle.setAttribute("r", radius);
     circle.setAttribute("fill", color);
     circle.classList.add("area");
+    (type === "double") ? circle.classList.add("double") : (type === "single") ? circle.classList.add("single") : circle.classList.add("outer");
     return circle
 }
   
@@ -124,7 +125,7 @@ function createTotalBoard(){
     const svg = document.getElementById("board");
 
     // first add outer ring
-    svg.appendChild(createCircle(500, colorOne[0]));
+    svg.appendChild(createCircle(500, colorOne[0]), "outer");
 
     // abve outer ring place all the pizza slices
     for(var i = 0; i<20; i++){
@@ -136,9 +137,9 @@ function createTotalBoard(){
     }
 
     // above the slices add the single bull circle
-    svg.appendChild(createCircle(50, colorTwo[1]));
+    svg.appendChild(createCircle(50, colorTwo[1]), "single");
     // above the single bull the bullseye
-    svg.appendChild(createCircle(25, colorTwo[0]));
+    svg.appendChild(createCircle(25, colorTwo[0]), "double");
 }
 
 createTotalBoard();
@@ -146,43 +147,38 @@ createTotalBoard();
 function getRandomAreas(){
     const array = Array.from(document.getElementsByClassName("area"));
     array.map(it=>it.classList.remove("selected"));
+    const singles = Array.from(document.getElementsByClassName("single"));
+    const doubles = Array.from(document.getElementsByClassName("double"));
+    const triples = Array.from(document.getElementsByClassName("triple"));
     let randomAreas = [];
+    // if/else statement for all the different modes 
     if(mode==="all"){
         for( var i = 0; i<3 ;i++){
             randomAreas.push(array.splice(Math.floor(Math.random()*array.length) , 1));
         }
     } else if(mode==="single") {
-        const singles = Array.from(document.getElementsByClassName("single"));
         for( var i = 0; i<3 ;i++){
             randomAreas.push(singles.splice(Math.floor(Math.random()*singles.length) , 1));
         }
     } else if(mode==="double"){
-        const doubles = Array.from(document.getElementsByClassName("double"));
         for( var i = 0; i<3 ;i++){
             randomAreas.push(doubles.splice(Math.floor(Math.random()*doubles.length) , 1));
         }
     } else if(mode==="triple"){
-        const triples = Array.from(document.getElementsByClassName("triple"));
         for( var i = 0; i<3 ;i++){
-            randomAreas.push(triple.splice(Math.floor(Math.random()*triple.length) , 1));
+            randomAreas.push(triples.splice(Math.floor(Math.random()*triples.length) , 1));
         }
     } else if(mode==="singledouble"){
-        const double = Array.from(document.getElementsByClassName("double"));
-        const single = Array.from(document.getElementsByClassName("single"))
         const singledouble = [...double, ...single];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(singledouble.splice(Math.floor(Math.random()*singledouble.length) , 1));
         }
     } else if(mode==="singletriple"){
-        const triple = Array.from(document.getElementsByClassName("triple"));
-        const single = Array.from(document.getElementsByClassName("single"))
         const singletriple = [...triple, ...single];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(singletriple.splice(Math.floor(Math.random()*singletriple.length) , 1));
         }
     } else if(mode==="doubletriple"){
-        const triple = Array.from(document.getElementsByClassName("triple"));
-        const double = Array.from(document.getElementsByClassName("double"))
         const doubletriple = [...triple, ...double];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(doubletriple.splice(Math.floor(Math.random()*doubletriple.length) , 1));
@@ -194,5 +190,3 @@ function getRandomAreas(){
 function changeMode(){
     mode = document.getElementById("selectList").value;
 }
-
-
