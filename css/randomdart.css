@@ -39,8 +39,8 @@ body{
     width:100vw;
     height: 100vh;
     display: grid;
-    grid-template-areas: "selection""mode""board""button";
-    grid-template-rows: 1fr 1fr 550px 1fr;
+    grid-template-areas: "selection""mode""button""board";
+    grid-template-rows: 1fr 1fr 1fr 550px;
 }
 
 #selection{
