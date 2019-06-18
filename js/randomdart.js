@@ -1,4 +1,4 @@
-document.getElementById("selectBtn").addEventListener("click", changeMode)
+document.getElementById("selectList").addEventListener("change", changeMode)
 document.getElementById("randomBtn").addEventListener("click", getRandomAreas)
 let mode = "all";
 
@@ -108,7 +108,7 @@ function createCircle(radius, color, type){
     circle.setAttribute("cy", 500);
     circle.setAttribute("r", radius);
     circle.setAttribute("fill", color);
-    circle.classList.add("area");
+    (type!=="outer") && circle.classList.add("area");
     (type === "double") ? circle.classList.add("double") : (type === "single") ? circle.classList.add("single") : circle.classList.add("outer");
     return circle
 }
@@ -125,7 +125,7 @@ function createTotalBoard(){
     const svg = document.getElementById("board");
 
     // first add outer ring
-    svg.appendChild(createCircle(500, colorOne[0]), "outer");
+    svg.appendChild(createCircle(500, colorOne[0], "outer"));
 
     // abve outer ring place all the pizza slices
     for(var i = 0; i<20; i++){
@@ -137,9 +137,9 @@ function createTotalBoard(){
     }
 
     // above the slices add the single bull circle
-    svg.appendChild(createCircle(50, colorTwo[1]), "single");
+    svg.appendChild(createCircle(50, colorTwo[1], "single"));
     // above the single bull the bullseye
-    svg.appendChild(createCircle(25, colorTwo[0]), "double");
+    svg.appendChild(createCircle(25, colorTwo[0], "double"));
 }
 
 createTotalBoard();
@@ -169,17 +169,17 @@ function getRandomAreas(){
             randomAreas.push(triples.splice(Math.floor(Math.random()*triples.length) , 1));
         }
     } else if(mode==="singledouble"){
-        const singledouble = [...double, ...single];
+        const singledouble = [...doubles, ...singles];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(singledouble.splice(Math.floor(Math.random()*singledouble.length) , 1));
         }
     } else if(mode==="singletriple"){
-        const singletriple = [...triple, ...single];
+        const singletriple = [...triples, ...singles];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(singletriple.splice(Math.floor(Math.random()*singletriple.length) , 1));
         }
     } else if(mode==="doubletriple"){
-        const doubletriple = [...triple, ...double];
+        const doubletriple = [...triples, ...doubles];
         for( var i = 0; i<3 ;i++){
             randomAreas.push(doubletriple.splice(Math.floor(Math.random()*doubletriple.length) , 1));
         }
@@ -189,4 +189,12 @@ function getRandomAreas(){
 
 function changeMode(){
     mode = document.getElementById("selectList").value;
+    let text;
+    text = (mode==="all" || mode==="single" || mode==="double" || mode==="triple") ? mode : (mode==="singledouble") ? "single & double" :
+    (mode==="singletriple") ? "single & triple" : "double & triple";
+    writeMode(text);
+}
+
+function writeMode(text){
+    document.getElementById("modeText").innerHTML = text;
 }
